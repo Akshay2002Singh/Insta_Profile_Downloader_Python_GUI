@@ -1,25 +1,22 @@
+import requests
+import instaloader
 from tkinter import *
 from time import sleep
 
-tryied_to_download=0
-temp_status=""
-file_size=0
 # functions
 def clear_url_box():
-    URL.set("")
+    User.set("")
 def update_status(temp):
     statusvar.set(temp)
     sbar.update()
-def update_percentage_status(temp):
-    statusvar.set(f"{temp_status}\nDone : {int(temp*100)}%")
-    sbar.update()
-def progress(stream,chunk,byte_remaining):
-    percent = (file_size-byte_remaining)/file_size
-    update_percentage_status(percent)
-    
-    
-
-    
+def get_image_url():
+    # username = User.get()
+    username = "elite2002akshay"
+    ig = instaloader.Instaloader()
+    try:
+        t = ig.download_profile(username , profile_pic_only=True)
+    except:
+        update_status("Some Error")
 
 
 # main body
@@ -32,7 +29,7 @@ if __name__=="__main__":
     
 
     # Variables
-    URL = StringVar()
+    User = StringVar()
     statusvar = StringVar()
     statusvar.set("Ready to download")
     # code to download a video
@@ -48,10 +45,10 @@ if __name__=="__main__":
     name.pack()
     space=Label(f1,text="",font="calibre 1 bold")
     space.pack()
-    url_input=Entry(f1,textvariable=URL,font="calibre 25 normal",fg="blue",relief=SUNKEN)
-    url_input.pack()
+    user_name=Entry(f1,textvariable=User,font="calibre 25 normal",fg="blue",relief=SUNKEN)
+    user_name.pack()
 
-    download_btn=Button(f1,text="Download",command=exit,bd=5,fg="blue",font="calibre 18 bold")
+    download_btn=Button(f1,text="Download",command=get_image_url,bd=5,fg="blue",font="calibre 18 bold")
     download_btn.pack(side = LEFT, expand = True, fill = X)
     clear_url_btn=Button(f1,text="CLEAR URL",command=clear_url_box,bd=5,font="calibre 18 bold")
     clear_url_btn.pack(side = LEFT, expand = True, fill = X)
