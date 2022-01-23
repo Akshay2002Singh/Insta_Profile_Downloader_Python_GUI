@@ -1,4 +1,5 @@
 import requests
+import os
 import instaloader
 from tkinter import *
 from time import sleep
@@ -10,15 +11,16 @@ def update_status(temp):
     statusvar.set(temp)
     sbar.update()
 def get_image_url():
-    # username = User.get()
-    username = "elite2002akshay"
+    username = User.get()
+    update_status("Downloading")
+    # username = "elite2002akshay"
     ig = instaloader.Instaloader()
     try:
         t = ig.download_profile(username , profile_pic_only=True)
     except:
         update_status("Some Error")
-
-
+        sleep(3)
+    update_status("Ready to Download")
 # main body
 if __name__=="__main__":
     root = Tk()
@@ -30,6 +32,10 @@ if __name__=="__main__":
 
     # Variables
     User = StringVar()
+    downloads_location=StringVar()
+    download_path=StringVar()
+    download_path.set(os.getcwd())
+    downloads_location.set(f"Downloads path :- {download_path.get()}")
     statusvar = StringVar()
     statusvar.set("Ready to download")
     # code to download a video
@@ -47,18 +53,12 @@ if __name__=="__main__":
     space.pack()
     user_name=Entry(f1,textvariable=User,font="calibre 25 normal",fg="blue",relief=SUNKEN)
     user_name.pack()
-
+    download_loacation_display=Label(f1,textvariable=downloads_location,font="calibre 10 bold italic",relief=FLAT,padx=18,pady=3)
+    download_loacation_display.pack()
     download_btn=Button(f1,text="Download",command=get_image_url,bd=5,fg="blue",font="calibre 18 bold")
     download_btn.pack(side = LEFT, expand = True, fill = X)
     clear_url_btn=Button(f1,text="CLEAR URL",command=clear_url_box,bd=5,font="calibre 18 bold")
     clear_url_btn.pack(side = LEFT, expand = True, fill = X)
-
-    # show files 
-    f2=Frame(root)
-    f2.pack(side=TOP,fill=BOTH,expand=True)
-    
-
-    
     # statusbar
     sbar = Label(root,textvariable=statusvar, relief=SUNKEN, anchor="w",padx=10,pady=7,background="cyan",fg="red",font="calibre 12 bold")
     sbar.pack(side=BOTTOM, fill=X)
