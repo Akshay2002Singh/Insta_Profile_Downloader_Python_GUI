@@ -1,4 +1,5 @@
 import requests
+import threading
 import os
 import instaloader
 from tkinter import *
@@ -10,7 +11,11 @@ def clear_url_box():
 def update_status(temp):
     statusvar.set(temp)
     sbar.update()
+def download():
+    t1 = threading.Thread(target=get_image_url, name='t1')
+    t1.start()
 def get_image_url():
+    download_btn.config(text="Wait",command=None)
     username = User.get()
     update_status("Downloading")
     # username = "elite2002akshay"
@@ -20,6 +25,7 @@ def get_image_url():
     except:
         update_status("Some Error")
         sleep(3)
+    download_btn.config(text="Download",command=download)
     update_status("Ready to Download")
 # main body
 if __name__=="__main__":
@@ -55,7 +61,7 @@ if __name__=="__main__":
     user_name.pack()
     download_loacation_display=Label(f1,textvariable=downloads_location,font="calibre 10 bold italic",relief=FLAT,padx=18,pady=3)
     download_loacation_display.pack()
-    download_btn=Button(f1,text="Download",command=get_image_url,bd=5,fg="blue",font="calibre 18 bold")
+    download_btn=Button(f1,text="Download",command=download,bd=5,fg="blue",font="calibre 18 bold")
     download_btn.pack(side = LEFT, expand = True, fill = X)
     clear_url_btn=Button(f1,text="CLEAR URL",command=clear_url_box,bd=5,font="calibre 18 bold")
     clear_url_btn.pack(side = LEFT, expand = True, fill = X)
