@@ -32,8 +32,8 @@ if __name__=="__main__":
     root = Tk()
     # window size
     root.title("Elite Insta Profile Photo Downloader")
-    root.geometry("1000x600")
-    root.minsize(1000,600)
+    root.geometry("850x520")
+    root.minsize(800,400)
     
 
     # Variables
