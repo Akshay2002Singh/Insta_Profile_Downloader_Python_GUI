@@ -1,5 +1,5 @@
 <h1 align='center'>
- <strong> <samp>Downloading Instagram Profile Photo using Python</samp> </strong> 👨‍💻
+ <strong><samp>Downloading Instagram Profile Photo using Python</samp></strong> 👨‍💻
 </h1>
 
 ## Instagram is an American photo and video sharing social networking service founded by Kevin Systrom and Mike Krieger.
